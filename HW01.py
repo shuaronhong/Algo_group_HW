@@ -135,9 +135,11 @@ class Solution:
                         self.idx += 1
                     if type(prev_elem) == str:
                         counter[prev_elem] += int(num_elem) - 1
+                        prev_elem = None
                     else:
                         for elem in prev_elem:
                             counter[elem] += prev_elem[elem] * int(num_elem)
+                        prev_elem = None
                     self.idx += 1
                 elif formula[self.idx] == "(":  # if encounter this, you should parse from the next
                     self.idx += 1
@@ -146,6 +148,10 @@ class Solution:
                     self.idx += 1
                     return counter
                 elif formula[self.idx].isupper():
+                    if prev_elem is not None and type(prev_elem) != str:
+                        for elem in prev_elem:
+                            counter[elem] += prev_elem[elem]
+                        prev_elem = None
                     element = formula[self.idx]
                     while self.idx + 1 < n and formula[self.idx + 1].islower():
                         element += formula[self.idx + 1]
@@ -155,6 +161,9 @@ class Solution:
                     self.idx += 1
                 else:
                     print("should never be able to enter formula[self.idx].islower()")
+            if prev_elem is not None and type(prev_elem) != str:
+                for elem in prev_elem:
+                    counter[elem] += prev_elem[elem]
             return counter
 
         res = ""
