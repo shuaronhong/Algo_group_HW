@@ -117,3 +117,49 @@ class Solution:
                 res_str += special_str
             return res_str
         return helper(S)
+
+#leetcode 726
+class Solution:
+    def countOfAtoms(self, formula: str) -> str:
+        self.idx = 0
+
+        def parse():
+            counter = collections.Counter()
+            n = len(formula)
+            prev_elem = None
+            while self.idx < n:
+                if formula[self.idx].isdigit():
+                    num_elem = formula[self.idx]
+                    while self.idx + 1 < n and formula[self.idx + 1].isdigit():
+                        num_elem += formula[self.idx + 1]
+                        self.idx += 1
+                    if type(prev_elem) == str:
+                        counter[prev_elem] += int(num_elem) - 1
+                    else:
+                        for elem in prev_elem:
+                            counter[elem] += prev_elem[elem] * int(num_elem)
+                    self.idx += 1
+                elif formula[self.idx] == "(":  # if encounter this, you should parse from the next
+                    self.idx += 1
+                    prev_elem = parse()
+                elif formula[self.idx] == ")":  # crucial for returning from a paran
+                    self.idx += 1
+                    return counter
+                elif formula[self.idx].isupper():
+                    element = formula[self.idx]
+                    while self.idx + 1 < n and formula[self.idx + 1].islower():
+                        element += formula[self.idx + 1]
+                        self.idx += 1
+                    counter[element] += 1
+                    prev_elem = element
+                    self.idx += 1
+                else:
+                    print("should never be able to enter formula[self.idx].islower()")
+            return counter
+
+        res = ""
+        counter = parse()
+        for key in sorted(counter.keys()):
+            num = "" if counter[key] == 1 else str(counter[key])
+            res += key + num
+        return res
