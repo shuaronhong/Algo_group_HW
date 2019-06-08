@@ -1,4 +1,8 @@
 #leetcode 783
+"""
+Runtime: 28 ms, faster than 99.43% of Python3 online submissions for Minimum Distance Between BST Nodes.
+Memory Usage: 13 MB, less than 94.20% of Python3 online submissions for Minimum Distance Between BST Nodes.
+"""
 class Solution:
     def minDiffInBST(self, root: TreeNode) -> int:
         self.prevNode = None
@@ -16,7 +20,9 @@ class Solution:
         inOrderTraverse(root)
         return self.minDiff
 
-#leetcode 247
+#leetcode 247 lintcode 776
+#Total runtime 856 ms
+#Your submission beats 92.50% Submissions!
 class Solution:
     def findStrobogrammatic(self, n):
         # write your code here
@@ -43,7 +49,9 @@ class Solution:
                 return res
         return helper(n, n)
 
-#leetcode 544
+#leetcode 544 lintcode 879
+#Total runtime 101 ms
+#Your submission beats 100.00% Submissions!
 class Solution:
     def findContestMatch(self, n):
         # write your code here
@@ -66,6 +74,8 @@ class Solution:
         return str(res).replace("[", "").replace("]", "").replace("'", "")
 
 #leetcode 698
+#Runtime: 44 ms, faster than 92.55% of Python3 online submissions for Partition to K Equal Sum Subsets.
+#Memory Usage: 13.2 MB, less than 46.37% of Python3 online submissions for Partition to K Equal Sum Subsets.
 class Solution:
     def canPartitionKSubsets(self, nums: List[int], k: int) -> bool:
         sum_nums = sum(nums)
@@ -93,6 +103,8 @@ class Solution:
         return search(group, nums, target)
 
 #leetcode 761
+#Runtime: 32 ms, faster than 98.64% of Python3 online submissions for Special Binary String.
+#Memory Usage: 13.2 MB, less than 55.75% of Python3 online submissions for Special Binary String.
 class Solution:
     def makeLargestSpecial(self, S: str) -> str:
         def helper(S):
@@ -119,6 +131,8 @@ class Solution:
         return helper(S)
 
 #leetcode 726
+#Runtime: 32 ms, faster than 99.25% of Python3 online submissions for Number of Atoms.
+#Memory Usage: 13.1 MB, less than 62.64% of Python3 online submissions for Number of Atoms.
 class Solution:
     def countOfAtoms(self, formula: str) -> str:
         self.idx = 0
